@@ -19,8 +19,8 @@ namespace CurrencyRate.Services
         public CurrencyFromAPIService()
         {
             // конечные адреса, по которым будет приходить ответ с сервера на сегодня и завтра
-            var todayAddress = address + DateTime.Today;
-            var tomorrowAddress = address + DateTime.Today.AddDays(1);
+            var todayAddress = address + DateTime.Today.ToString("yyyy-MM-dd");
+            var tomorrowAddress = address + DateTime.Today.AddDays(1).ToString("yyyy-MM-dd");
 
             // Запрос на сегодняшнюю дату 
             var todayRequest = new GetRequest(todayAddress);
