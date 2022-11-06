@@ -4,7 +4,7 @@
              x:Class="CurrencyRate.Pages.CurrencyPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Lerka pisun idi spat!" FontSize="30"
+            <Label Text="Hello new Team" FontSize="30"
                 VerticalOptions="StartAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
         </StackLayout>
