@@ -29,10 +29,14 @@ namespace CurrencyRate.PageModels
         {
             InitCurrencies();
         }
+        public override void ReverseInit(object returnedData)
+        {
+            GeneralCurrencies = (List<GeneralCurrencyRate>)returnedData;
+        }
 
         private async Task GoToSettinsPage()
         {
-            await CoreMethods.PushPageModel<SettingsPageModel>();
+            await CoreMethods.PushPageModel<SettingsPageModel>(GeneralCurrencies);
         }
         private void InitCurrencies()
         {
