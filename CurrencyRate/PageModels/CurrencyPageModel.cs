@@ -1,4 +1,5 @@
-﻿using CurrencyRate.Interfaces;
+﻿using CurrencyRate.Helpers;
+using CurrencyRate.Interfaces;
 using CurrencyRate.Models;
 using CurrencyRate.Services;
 using FreshMvvm;
@@ -6,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace CurrencyRate.PageModels
 {
@@ -17,6 +20,7 @@ namespace CurrencyRate.PageModels
         public List<GeneralCurrencyRate> GeneralCurrencies { get; set; } = new List<GeneralCurrencyRate>();
         public string Today { get; set; } = DateTime.Today.ToString("dd.MM.yyyy");
         public string Tomorrow { get; set; } = DateTime.Today.AddDays(1).ToString("dd.MM.yyyy");
+        public ICommand SettingPageCommand => SingleExecutionCommand.FromFunc(GoToSettinsPage);
         public CurrencyPageModel(ICurrencyService currencyService)
         {
             _currencyService = currencyService;
@@ -24,8 +28,12 @@ namespace CurrencyRate.PageModels
         public override void Init(object initData)
         {
             InitCurrencies();
-        }   
+        }
 
+        private async Task GoToSettinsPage()
+        {
+            await CoreMethods.PushPageModel<SettingsPageModel>();
+        }
         private void InitCurrencies()
         {
             TodayCurrencies = _currencyService.GetCurrencyRates().Item1;
