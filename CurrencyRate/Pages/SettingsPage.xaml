@@ -47,7 +47,7 @@
                 <Label BackgroundColor="LightGray" Text="" TextColor="LightGray"/>
             </Grid>
             <syncfusion:SfListView x:Name="listView" 
-                   ItemsSource="{Binding GeneralCurrencies}"
+                   ItemsSource="{Binding GeneralCurrencies, Mode=TwoWay}"
                    DragStartMode="OnDragIndicator"
                    BackgroundColor="White"
                    ItemSize="60">

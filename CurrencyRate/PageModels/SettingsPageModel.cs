@@ -20,7 +20,7 @@ namespace CurrencyRate.PageModels
         }
         private async Task BackToMainPage()
         {
-            await CoreMethods.PopPageModel(GeneralCurrencies);
+            await CoreMethods.PopPageModel();
         }
     }
 }

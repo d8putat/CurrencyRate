@@ -7,6 +7,6 @@ namespace CurrencyRate.Interfaces
 {
     public interface ICurrencyService
     {
-        (List<Currency>, List<Currency>) GetCurrencyRates();
+        List<Currency> GetCurrencyRates(DateTime date);
     }
 }

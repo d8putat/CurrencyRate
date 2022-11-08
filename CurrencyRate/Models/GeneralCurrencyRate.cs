@@ -6,7 +6,7 @@ namespace CurrencyRate.Models
 {
     public class GeneralCurrencyRate : Currency
     {
-        public decimal Cur_TomorrowRate { get; set; }
+        public decimal Cur_SecondRate { get; set; }
         public string Cur_GeneralScaleName { get; set; }
     }
 }

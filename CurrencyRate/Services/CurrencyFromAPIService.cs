@@ -10,30 +10,15 @@ namespace CurrencyRate.Services
 {
     public class CurrencyFromAPIService : ICurrencyService
     {
-        private (List<Currency>, List<Currency>) Currencies;
+        private List<Currency> Currencies;
         private readonly string address = "https://www.nbrb.by/api/exrates/rates?periodicity=0&ondate=";
-        public (List<Currency>, List<Currency>) GetCurrencyRates()
+        public List<Currency> GetCurrencyRates(DateTime date)
         {
+            var request = new GetRequest(address + date.ToString("yyyy-MM-dd"));
+            var responce = request.RunRequest();
+            Currencies = JsonConvert.DeserializeObject<List<Currency>>(responce);
             return Currencies;
         }
-        public CurrencyFromAPIService()
-        {
-            // конечные адреса, по которым будет приходить ответ с сервера на сегодня и завтра
-            var todayAddress = address + DateTime.Today.ToString("yyyy-MM-dd");
-            var tomorrowAddress = address + DateTime.Today.AddDays(1).ToString("yyyy-MM-dd");
-
-            // Запрос на сегодняшнюю дату 
-            var todayRequest = new GetRequest(todayAddress);
-            var todayResponce = todayRequest.RunRequest();
-            var todayCurrency = JsonConvert.DeserializeObject<List<Currency>>(todayResponce);
-
-            // Запрос на завтрашнюю дату
-            var tomorrowRequest = new GetRequest(tomorrowAddress);
-            var tomorrowResponce = tomorrowRequest.RunRequest();
-            var tomorrowCurrency = JsonConvert.DeserializeObject<List<Currency>>(tomorrowResponce);
-
-            // создание кортежа со списками курсов 2 дней
-            Currencies = (todayCurrency, tomorrowCurrency);
-        }
+        public CurrencyFromAPIService() { }
     }
 }
