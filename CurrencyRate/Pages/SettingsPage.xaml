@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CurrencyRate.Pages.SettingsPage"
              xmlns:extensions="clr-namespace:CurrencyRate.MarkupExtensions;assembly=CurrencyRate"
+             xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <StackLayout Spacing="0">
@@ -45,6 +46,35 @@
                 </Grid.RowDefinitions>
                 <Label BackgroundColor="LightGray" Text="" TextColor="LightGray"/>
             </Grid>
+            <syncfusion:SfListView x:Name="listView" 
+                   ItemsSource="{Binding GeneralCurrencies, Mode=TwoWay}"
+                   DragStartMode="OnDragIndicator"
+                   BackgroundColor="White"
+                   ItemSize="60">
+                <syncfusion:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid RowSpacing="0" ColumnSpacing="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0,13*" />
+                                <ColumnDefinition Width="0,37*" />
+                                <ColumnDefinition Width="0,25*" />
+                                <ColumnDefinition Width="0,25*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Label HeightRequest="30" TextColor="Black" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" Text="{Binding Cur_Abbreviation}" FontAttributes="Bold" FontSize="20" Grid.Column="0" Grid.Row="0" Margin="5,0,0,0"/>
+                            <Label HeightRequest="30" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding Cur_GeneralScaleName}" FontSize="15" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="5,0,0,0"/>
+                            <syncfusion:DragIndicatorView HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" ListView="{x:Reference listView}">
+                                <Grid>
+                                    <Image Source="{extensions:ImageResource CurrencyRate.Images.drag_item.png}" HeightRequest="30"/>
+                                </Grid>
+                            </syncfusion:DragIndicatorView>
+                        </Grid>
+                    </DataTemplate>
+                </syncfusion:SfListView.ItemTemplate>
+            </syncfusion:SfListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -13,12 +13,14 @@
   <ItemGroup>
     <None Remove="Images\accept.png" />
     <None Remove="Images\accept_changes.png" />
+    <None Remove="Images\drag_item.png" />
     <None Remove="Images\left_arrow.png" />
     <None Remove="Images\settings_image.png" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Images\accept_changes.png" />
+    <EmbeddedResource Include="Images\drag_item.png" />
     <EmbeddedResource Include="Images\left_arrow.png" />
     <EmbeddedResource Include="Images\settings_image.png" />
   </ItemGroup>
@@ -26,6 +28,7 @@
   <ItemGroup>
     <PackageReference Include="FreshMvvm" Version="4.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="20.3.0.52" />
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
