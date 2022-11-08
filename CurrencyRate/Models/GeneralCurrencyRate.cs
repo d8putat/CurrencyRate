@@ -8,5 +8,6 @@ namespace CurrencyRate.Models
     {
         public decimal Cur_SecondRate { get; set; }
         public string Cur_GeneralScaleName { get; set; }
+        public bool Cur_IsVisible { get; set; }
     }
 }

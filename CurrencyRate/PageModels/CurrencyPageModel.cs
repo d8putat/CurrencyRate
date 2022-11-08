@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Essentials;
 
 namespace CurrencyRate.PageModels
 {
@@ -19,6 +20,7 @@ namespace CurrencyRate.PageModels
         public List<Currency> TodayCurrencies { get; set; } = new List<Currency>();
         public List<Currency> TomorrowCurrencies { get; set; } = new List<Currency>();
         public List<GeneralCurrencyRate> GeneralCurrencies { get; set; } = new List<GeneralCurrencyRate>();
+        public List<GeneralCurrencyRate> DisplayedCurrencies { get; set; } = new List<GeneralCurrencyRate>();
         private readonly string dateFormat = "dd.MM.yyyy";
         private DateTime Today = DateTime.Today;
         public string FirstDate { get; set; }
@@ -31,6 +33,7 @@ namespace CurrencyRate.PageModels
         public override void Init(object initData)
         {
             InitCurrencies();
+            Preferences.Set("IsTheFirstLaunch", false);
         }
         public override void ReverseInit(object returnedData)
         {
@@ -52,13 +55,8 @@ namespace CurrencyRate.PageModels
                 for (int i = 0; i < TodayCurrencies.Count; i++)
                 {
                     var currency = new GeneralCurrencyRate();
-                    currency.Cur_Id = TodayCurrencies[i].Cur_Id;
-                    currency.Date = TodayCurrencies[i].Date;
-                    currency.Cur_Abbreviation = TodayCurrencies[i].Cur_Abbreviation;
-                    currency.Cur_Scale = TodayCurrencies[i].Cur_Scale;
-                    currency.Cur_Name = TodayCurrencies[i].Cur_Name;
+                    SetCurrencyValues(currency, i);
                     currency.Cur_OfficialRate = TodayCurrencies[i].Cur_OfficialRate;
-                    currency.Cur_GeneralScaleName = TodayCurrencies[i].Cur_Scale.ToString() + " " + TodayCurrencies[i].Cur_Name;
                     // Заполняем поле курса на завтра из списка TomorrowCurrencies
                     currency.Cur_SecondRate = TomorrowCurrencies.Find(p => p.Cur_Id == TodayCurrencies[i].Cur_Id).Cur_OfficialRate;
                     GeneralCurrencies.Add(currency);
@@ -73,19 +71,53 @@ namespace CurrencyRate.PageModels
                 for (int i = 0; i < TodayCurrencies.Count; i++)
                 {
                     var currency = new GeneralCurrencyRate();
-                    currency.Cur_Id = TodayCurrencies[i].Cur_Id;
-                    currency.Date = TodayCurrencies[i].Date;
-                    currency.Cur_Abbreviation = TodayCurrencies[i].Cur_Abbreviation;
-                    currency.Cur_Scale = TodayCurrencies[i].Cur_Scale;
-                    currency.Cur_Name = TodayCurrencies[i].Cur_Name;
+                    SetCurrencyValues(currency, i);
                     // Заполняем поле курса на вчера из списка YesturdayCurrencies
                     currency.Cur_OfficialRate = YesturdayCurrencies.Find(p => p.Cur_Id == TodayCurrencies[i].Cur_Id).Cur_OfficialRate;
-                    currency.Cur_GeneralScaleName = TodayCurrencies[i].Cur_Scale.ToString() + " " + TodayCurrencies[i].Cur_Name;
                     // Заполняем поле курса на сегодня из списка TodayCurrencies
                     currency.Cur_SecondRate = TodayCurrencies[i].Cur_OfficialRate;
                     GeneralCurrencies.Add(currency);
                 }
             }
+            bool hasKey = Preferences.Get("IsTheFirstLaunch",true);
+            if (hasKey)
+            {
+                foreach (var currency in GeneralCurrencies)
+                {
+                    currency.Cur_IsVisible = false;
+                    Preferences.Set(currency.Cur_Abbreviation+"Visibility",false);
+                }
+                // При первом запуске устанавливаем для usd, eur и rub видимость true
+                SetTrueVisibility("USD");
+                SetTrueVisibility("EUR");
+                SetTrueVisibility("RUB");
+            }
+            else
+            {
+                foreach (var currency in GeneralCurrencies)
+                    currency.Cur_IsVisible = Preferences.Get(currency.Cur_Abbreviation + "Visibility", false);
+            }
+            foreach (var currency in GeneralCurrencies)
+            {
+                if(currency.Cur_IsVisible)
+                    DisplayedCurrencies.Add(currency);
+            }
+        }
+        private void SetTrueVisibility(string abbreviation)
+        {
+            var currency = GeneralCurrencies.Find(p => p.Cur_Abbreviation == abbreviation);
+            currency.Cur_IsVisible = true;
+            Preferences.Set(currency.Cur_Abbreviation + "Visibility", true);
+        }
+
+        private void SetCurrencyValues(GeneralCurrencyRate currency,int i)
+        {
+            currency.Cur_Id = TodayCurrencies[i].Cur_Id;
+            currency.Date = TodayCurrencies[i].Date;
+            currency.Cur_Abbreviation = TodayCurrencies[i].Cur_Abbreviation;
+            currency.Cur_Scale = TodayCurrencies[i].Cur_Scale;
+            currency.Cur_Name = TodayCurrencies[i].Cur_Name;
+            currency.Cur_GeneralScaleName = TodayCurrencies[i].Cur_Scale.ToString() + " " + TodayCurrencies[i].Cur_Name;
         }
     }
 }

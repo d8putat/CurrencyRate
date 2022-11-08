@@ -4,6 +4,7 @@ using CurrencyRate.Services;
 using FreshMvvm;
 using System;
 using System.Threading;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
