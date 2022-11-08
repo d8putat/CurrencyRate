@@ -37,7 +37,14 @@ namespace CurrencyRate.PageModels
         }
         public override void ReverseInit(object returnedData)
         {
-            GeneralCurrencies = (List<GeneralCurrencyRate>)returnedData;
+            foreach (var currency in GeneralCurrencies)
+                currency.Cur_IsVisible = Preferences.Get(currency.Cur_Abbreviation + "Visibility", false);
+            DisplayedCurrencies.Clear();
+            foreach (var currency in GeneralCurrencies)
+            {
+                if (currency.Cur_IsVisible)
+                    DisplayedCurrencies.Add(currency);
+            }
         }
 
         private async Task GoToSettinsPage()
@@ -85,7 +92,7 @@ namespace CurrencyRate.PageModels
                 foreach (var currency in GeneralCurrencies)
                 {
                     currency.Cur_IsVisible = false;
-                    Preferences.Set(currency.Cur_Abbreviation+"Visibility",false);
+                    Preferences.Set(currency.Cur_Abbreviation + "Visibility", false);
                 }
                 // При первом запуске устанавливаем для usd, eur и rub видимость true
                 SetTrueVisibility("USD");
