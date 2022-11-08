@@ -3,6 +3,7 @@ using CurrencyRate.Models;
 using FreshMvvm;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -11,16 +12,18 @@ using Xamarin.Forms;
 
 namespace CurrencyRate.PageModels
 {
+    [DesignTimeVisible(true)]
     public class SettingsPageModel : FreshBasePageModel
     {
         public List<GeneralCurrencyRate> GeneralCurrencies { get; set; } = new List<GeneralCurrencyRate>();
         public ICommand BackToMainPageCommand => SingleExecutionCommand.FromFunc(BackToMainPage);
         public ICommand VisibilityChangedCommand => new Command<GeneralCurrencyRate>(ChangeVisibility);
-        public ICommand SaveChangesCOmmand => new Command(SaveChanges);
+        public ICommand SaveChangesCommand => new Command(SaveChanges);
 
         public SettingsPageModel() { }
         public override void Init(object initData)
         {
+
             GeneralCurrencies = (List<GeneralCurrencyRate>)initData;
         }
         private async Task BackToMainPage()
@@ -28,6 +31,7 @@ namespace CurrencyRate.PageModels
             if(Preferences.Get("SaveSettings",false))
             {
                 await CoreMethods.PopPageModel(GeneralCurrencies);
+                Preferences.Set("SaveSettings", false);
             }
             else
             {
@@ -38,6 +42,7 @@ namespace CurrencyRate.PageModels
         {
             currency.Cur_IsVisible = !currency.Cur_IsVisible;
         }
+
         private void SaveChanges()
         {
             foreach(var currenсy in GeneralCurrencies)
