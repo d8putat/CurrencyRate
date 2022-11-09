@@ -3,6 +3,76 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CurrencyRate.App">
     <Application.Resources>
+        <!--  COLORS  -->
+        <Color x:Key="White">#FFFFFF</Color>
+        <Color x:Key="BackgroundHeaderColor">#808080</Color>
+        <Color x:Key="MainTextColor">#000000</Color>
+        <Color x:Key="ScaleNameColor">#A9A9A9</Color>
+
+        <!--  LABELS  -->
+        <Style x:Key="MainHeaderLabel" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource White}" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+            <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+        </Style>
+
+        <Style x:Key="DateLabel" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource MainTextColor}" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+            <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+            <Setter Property="FontAttributes" Value="Bold" />
+        </Style>
+
+        <Style x:Key="CurrencyAbbrevLabelStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource MainTextColor}"/>
+            <Setter Property="HeightRequest" Value="30" />
+            <Setter Property="HorizontalOptions" Value="StartAndExpand" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="Margin" Value="5,0,0,0" />
+            <Setter Property="Grid.ColumnSpan" Value="2" />
+        </Style>
+
+        <Style x:Key="CurrencyScaleLabelStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource BackgroundHeaderColor}"/>
+            <Setter Property="HorizontalOptions" Value="StartAndExpand" />
+            <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="Margin" Value="5,0,0,0" />
+            <Setter Property="Grid.ColumnSpan" Value="2" />
+        </Style>
+
+        <Style x:Key="CurrencyRateLabelStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource MainTextColor}"/>
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+            <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Grid.RowSpan" Value="2" />
+        </Style>
+
+        <!-- SWITCHES -->
+        <Style x:Key="SwitchStyle" TargetType="Switch">
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+            <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+            <Setter Property="Grid.RowSpan" Value="2" />
+        </Style>
+        
+        <!-- INDICATORS VIEW -->
+        <Style x:Key="IndicatorViewStyle" TargetType="Switch">
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+            <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+            <Setter Property="Grid.RowSpan" Value="2" />
+        </Style>
+
+        <!-- IMAGE BUTTONS -->
+        <Style x:Key="ImageButtonStyle" TargetType="ImageButton">
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+        </Style>
 
     </Application.Resources>
 </Application>
