@@ -30,8 +30,8 @@ namespace CurrencyRate.PageModels
         {
             if(Preferences.Get("SaveSettings",false))
             {
-                await CoreMethods.PopPageModel(GeneralCurrencies);
                 Preferences.Set("SaveSettings", false);
+                await CoreMethods.PopPageModel(GeneralCurrencies);
             }
             else
             {

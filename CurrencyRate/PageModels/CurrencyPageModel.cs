@@ -5,6 +5,7 @@ using CurrencyRate.Services;
 using FreshMvvm;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace CurrencyRate.PageModels
         public List<Currency> TodayCurrencies { get; set; } = new List<Currency>();
         public List<Currency> TomorrowCurrencies { get; set; } = new List<Currency>();
         public List<GeneralCurrencyRate> GeneralCurrencies { get; set; } = new List<GeneralCurrencyRate>();
-        public List<GeneralCurrencyRate> DisplayedCurrencies { get; set; } = new List<GeneralCurrencyRate>();
+        public ObservableCollection<GeneralCurrencyRate> DisplayedCurrencies { get; set; } = new ObservableCollection<GeneralCurrencyRate>();
         private readonly string dateFormat = "dd.MM.yyyy";
         private DateTime Today = DateTime.Today;
         public string FirstDate { get; set; }
