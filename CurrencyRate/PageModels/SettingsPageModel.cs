@@ -19,7 +19,7 @@ namespace CurrencyRate.PageModels
         public ICommand BackToMainPageCommand => SingleExecutionCommand.FromFunc(BackToMainPage);
         public ICommand VisibilityChangedCommand => new Command<GeneralCurrencyRate>(ChangeVisibility);
         public ICommand SaveChangesCommand => new Command(SaveChanges);
-
+        private readonly string SaveSettingsName = "SaveSettings";
         public SettingsPageModel() { }
         public override void Init(object initData)
         {
@@ -28,9 +28,9 @@ namespace CurrencyRate.PageModels
         }
         private async Task BackToMainPage()
         {
-            if(Preferences.Get("SaveSettings",false))
+            if(Preferences.Get(SaveSettingsName, false))
             {
-                Preferences.Set("SaveSettings", false);
+                Preferences.Set(SaveSettingsName, false);
                 await CoreMethods.PopPageModel(GeneralCurrencies);
             }
             else
@@ -49,7 +49,7 @@ namespace CurrencyRate.PageModels
             {
                 Preferences.Set(currenсy.Cur_Abbreviation + "Visibility", currenсy.Cur_IsVisible);
             }
-            Preferences.Set("SaveSettings", true);
+            Preferences.Set(SaveSettingsName, true);
         }
     }
 }
