@@ -5,6 +5,7 @@
              xmlns:local="clr-namespace:CurrencyRate.Behaviors;assembly=CurrencyRate"
              xmlns:extensions="clr-namespace:CurrencyRate.MarkupExtensions;assembly=CurrencyRate"
              xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:res="clr-namespace:CurrencyRate.LocalizationResources"
              xmlns:pageModels="clr-namespace:CurrencyRate.PageModels"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
@@ -26,7 +27,7 @@
                              Command="{Binding BackToMainPageCommand}"
                              WidthRequest="30"
                              Source="{extensions:ImageResource CurrencyRate.Images.left_arrow.png}"/>
-                <Label Grid.Column="1" Grid.Row="0" Text="Настройка валют" Style="{StaticResource MainHeaderLabel}" />
+                <Label Grid.Column="1" Grid.Row="0" Text="{x:Static res:Resource.CurrencySettings}" Style="{StaticResource MainHeaderLabel}" />
                 <ImageButton Grid.Column="2" 
                              Grid.Row="0"
                              HeightRequest="35"

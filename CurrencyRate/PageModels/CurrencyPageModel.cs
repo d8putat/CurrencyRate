@@ -1,5 +1,6 @@
 ﻿using CurrencyRate.Helpers;
 using CurrencyRate.Interfaces;
+using CurrencyRate.LocalizationResources;
 using CurrencyRate.Models;
 using CurrencyRate.Services;
 using FreshMvvm;
@@ -39,7 +40,9 @@ namespace CurrencyRate.PageModels
         public override void ReverseInit(object returnedData)
         {
             foreach (var currency in GeneralCurrencies)
+            {
                 currency.Cur_IsVisible = Preferences.Get(currency.Cur_Abbreviation + "Visibility", false);
+            }
             DisplayedCurrencies.Clear();
             foreach (var currency in GeneralCurrencies)
             {
@@ -125,7 +128,14 @@ namespace CurrencyRate.PageModels
             currency.Cur_Abbreviation = TodayCurrencies[i].Cur_Abbreviation;
             currency.Cur_Scale = TodayCurrencies[i].Cur_Scale;
             currency.Cur_Name = TodayCurrencies[i].Cur_Name;
-            currency.Cur_GeneralScaleName = TodayCurrencies[i].Cur_Scale.ToString() + " " + TodayCurrencies[i].Cur_Name;
+            if (Resource.Culture.Name == "en-US")
+            {
+                currency.Cur_GeneralScaleName = _currencyService.GetCurrencyEngNameById(currency.Cur_Id);
+            }
+            else
+            {
+                currency.Cur_GeneralScaleName = TodayCurrencies[i].Cur_Scale.ToString() + " " + TodayCurrencies[i].Cur_Name;
+            }
         }
     }
 }

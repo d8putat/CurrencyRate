@@ -8,5 +8,6 @@ namespace CurrencyRate.Interfaces
     public interface ICurrencyService
     {
         List<Currency> GetCurrencyRates(DateTime date);
+        string GetCurrencyEngNameById(string id);
     }
 }
