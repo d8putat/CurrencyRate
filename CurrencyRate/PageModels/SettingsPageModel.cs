@@ -12,7 +12,6 @@ using Xamarin.Forms;
 
 namespace CurrencyRate.PageModels
 {
-    [DesignTimeVisible(true)]
     public class SettingsPageModel : FreshBasePageModel
     {
         public List<GeneralCurrencyRate> GeneralCurrencies { get; set; } = new List<GeneralCurrencyRate>();
@@ -36,6 +35,10 @@ namespace CurrencyRate.PageModels
             else
             {
                 await CoreMethods.PopPageModel();
+                foreach (var currency in GeneralCurrencies)
+                {
+                    currency.Cur_IsVisible = Preferences.Get(currency.Cur_Abbreviation + "Visibility", false);
+                }
             }   
         }
         private void ChangeVisibility(GeneralCurrencyRate currency)

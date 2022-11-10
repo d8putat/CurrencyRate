@@ -7,6 +7,7 @@ using System.Threading;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using CurrencyRate.LocalizationResources;
 
 namespace CurrencyRate
 {
@@ -16,7 +17,10 @@ namespace CurrencyRate
         {
             InitializeComponent();
             InitServices();
-            Thread.Sleep(3000);
+            if (Device.RuntimePlatform != Device.UWP)
+            {
+               Resource.Culture = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
+            }
             MainPage = InitStartPage();
         }
 

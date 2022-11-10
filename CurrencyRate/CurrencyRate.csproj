@@ -38,17 +38,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="LocalizationResources\Resources.Designer.cs">
+    <Compile Update="LocalizationResources\Resource.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
+      <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="LocalizationResources\Resources.resx">
+    <EmbeddedResource Update="LocalizationResources\Resource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\CurrencyPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
